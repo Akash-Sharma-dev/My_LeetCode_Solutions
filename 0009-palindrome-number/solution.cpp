@@ -1,12 +1,16 @@
 class Solution {
 public:
-    long reverse(int x, long rev = 0){
-        if(x==0) return rev;
-        rev = rev*10 + x%10;
-        return reverse(x/10,rev);
-    }
     bool isPalindrome(int x) {
         if(x<0) return false;
-        return x == reverse(x);
+        int num = x, digit, rev = 0, maxi = INT_MAX;
+        while(num){
+            digit = num%10;
+            num /= 10;
+            if(rev > maxi/10 || (rev == maxi/10 && digit > maxi%10)){
+                return false;
+            }
+            rev = rev * 10 + digit;
+        }
+        return !(x - rev);
     }
 };
