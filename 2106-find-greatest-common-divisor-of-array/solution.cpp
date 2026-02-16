@@ -10,11 +10,9 @@ public:
                 maxi = nums[i];
             }
         }
-        int low = min(mini,maxi);
-        while(i<=low){
+        while(i<=mini){
             if(mini%i == 0 && maxi%i == 0){
-                gcd = max(gcd, i);
-                
+                gcd = i;
             }
             i++;
         }
