@@ -1,23 +1,27 @@
 class Solution {
 public:
     double myPow(double x, int n) {
-        if(n==0) return 1;
-        if(x==1) return 1;
+        long p = n;
+        bool flag = false;
         double pow = 1;
-        if(n == INT_MIN){
+        if(n==INT_MIN){
             pow *= x;
             n++;
         }
-        int p = abs(n);
+        if(n<0){
+            flag = true;
+            p = abs(n);
+        }
         while(p){
-            if(p%2 == 0){
+            while(p%2==0){
                 x *= x;
-                p /= 2;
+                p /= 2.00;
             }
             pow *= x;
             p--;
         }
-        if(n<0) return 1/pow;
+        if(flag) return 1/pow;
+        cout<<"hi";
         return pow;
     }
 };
