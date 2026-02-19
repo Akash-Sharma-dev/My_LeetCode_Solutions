@@ -1,25 +1,20 @@
 class Solution {
 public:
+int sum_sq(int n){
+    int sum = 0, digit = 0;
+    while(n){
+        digit = n%10;
+        n /= 10;
+        sum += (digit*digit);
+    }
+    return sum;
+}
     bool isHappy(int n) {
-        int square=0,digit;
-        unordered_map<int,int>mpp;
-        while(1){
-            digit = n%10;
-            square+=digit*digit;
-            n=n/10;  
-            if(n==0){
-                 if(mpp.find(square) != mpp.end()){
-                    return 0;
-                }
-                mpp[square] = 1;
-                if(square==1){
-                    return 1;
-                }
-                n = square;
-                square=0;
-            }
-
-        }
-        return 1;
+        int slow = n, fast = n;
+        do{
+            slow = sum_sq(slow);
+            fast = sum_sq(sum_sq(fast));
+        }while(slow!=fast);
+        return fast==1;
     }
 };
