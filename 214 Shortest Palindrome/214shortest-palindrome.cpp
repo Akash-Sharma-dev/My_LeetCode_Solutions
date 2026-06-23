@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> compute_lps(string s){
+        int n = s.length();
+        vector<int> lps(n,0);
+        int len = 0;
+        for(int i = 1; i<n;){
+            if(s[i] == s[len]){
+                len++;
+                lps[i] = len;
+                i++;
+            }else if(len!=0){
+                len = lps[len-1];
+            }else{
+                i++;
+            }
+        }
+        return lps;
+    }
+    string shortestPalindrome(string s) {
+        int n = s.size();
+        string og = s;
+        reverse(s.begin(),s.end());
+        string sr = og + '#' + s;
+        vector<int>lps = compute_lps(sr);
+        int len = lps[2*n];
+        int rem = n - len;
+        return s.substr(0,rem)+og;
+    }
+};
