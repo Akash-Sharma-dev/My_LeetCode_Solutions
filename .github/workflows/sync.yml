@@ -1,11 +1,19 @@
-name: Test
+name: Sync LeetCode
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - run: echo "Hello World"
+      - name: Sync
+        uses: Akash-Sharma-dev/leetcode-sync@337bda7
+        with:
+          github-token: ${{ github.token }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          verbose: true
+          commit-header: 'Sync LeetCode solution'
